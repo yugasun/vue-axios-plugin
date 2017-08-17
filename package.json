@@ -1,0 +1,28 @@
+{
+  "name": "vue-axios-plugin",
+  "version": "1.0.0",
+  "description": "axios plugin for Vuejs project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yugasun/vue-axios-plugin.git"
+  },
+  "keywords": [
+    "vue",
+    "axios",
+    "plugin"
+  ],
+  "author": "yugasun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yugasun/vue-axios-plugin/issues"
+  },
+  "homepage": "https://github.com/yugasun/vue-axios-plugin#readme",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "qs": "^6.5.0"
+  }
+}
