@@ -1,6 +1,6 @@
 {
   "name": "vue-axios-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "axios plugin for Vuejs project",
   "main": "index.js",
   "scripts": {
