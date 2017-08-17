@@ -13,7 +13,7 @@ axios plugin for Vuejs project
 ### CommonJS:
 
 ```bash
-npm install --save axios vue-axios-plugin
+npm install --save vue-axios-plugin
 ```
 
 Add config for webpack `babel-loader`:
