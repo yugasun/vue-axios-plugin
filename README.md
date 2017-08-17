@@ -16,6 +16,16 @@ axios plugin for Vuejs project
 npm install --save axios vue-axios-plugin
 ```
 
+Add config for webpack `babel-loader`:
+
+```javascript
+{
+  test: /\.js$/,
+  loader: 'babel-loader',
+  include: [resolve('src'), resolve('test'), resolve('node_modules/vue-axios-plugin')]
+},
+```
+
 And in your entry file:
 
 ```javascript

@@ -18,21 +18,26 @@ axios.interceptors.response.use(
   error => Promise.resolve(error.response)
 )
 
-const VueHttp = {}
+const VueAxiosPlugin = {}
 
+/**
+ * JSON stringify the properties who's type if object
+ *
+ * @param {any} obj
+ * @returns
+ */
 function jsonProp (obj) {
   Object.keys(obj).forEach((key) => {
     if ((typeof obj[key]) === 'object') {
-      if (obj[key] instanceof Array) {
-        obj[key] = JSON.stringify(obj[key])
-      } else {
-        obj[key] = jsonProp(obj)
-      }
+      obj[key] = JSON.stringify(obj[key])
     }
   })
   return obj
 }
 
+/**
+ * default axios config
+ */
 const defaultConfig = {
   timeout: 60000,
   headers: {
@@ -45,8 +50,8 @@ const defaultConfig = {
 /**
  * options.checkStatus: default uniform handler for get/post method
  */
-VueHttp.install = (Vue, options) => {
-  let resCheck = typeof options.checkStatus === 'function' ? options.checkStatus : defaultCheckStatus
+VueAxiosPlugin.install = (Vue, options) => {
+  let resCheck = (options && options.checkStatus && typeof (options.checkStatus) === 'function') ? options.checkStatus : defaultCheckStatus
   Vue.prototype.$axios = axios
   Vue.prototype.$http = {
     get: (url, data, options) => {
@@ -59,7 +64,7 @@ VueHttp.install = (Vue, options) => {
           params: data.params
         }
       }
-      axios(axiosOpt).then(resCheck)
+      return axios(axiosOpt).then(resCheck)
     },
     post: (url, data, options) => {
       let axiosOpt = {
@@ -78,9 +83,9 @@ VueHttp.install = (Vue, options) => {
           ]
         }
       }
-      axios(axiosOpt).then(resCheck)
+      return axios(axiosOpt).then(resCheck)
     }
   }
 }
 
-export default VueHttp
+export default VueAxiosPlugin
