@@ -61,7 +61,7 @@ VueAxiosPlugin.install = (Vue, options) => {
         ...{
           method: 'get',
           url: url,
-          params: data.params
+          params: data
         }
       }
       return axios(axiosOpt).then(resCheck)

@@ -19,6 +19,11 @@ npm install --save vue-axios-plugin
 Add config for webpack `babel-loader`:
 
 ```javascript
+// resolve is the function to join your folder path
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
 {
   test: /\.js$/,
   loader: 'babel-loader',
@@ -54,7 +59,7 @@ Vue.use(VueAxiosPlugin, {
 default method in `$http` :
 
 ```javascript
-this.$http.get(url, {params: data}, options).then((response) => {
+this.$http.get(url, data, options).then((response) => {
   console.log(response.data)
 })
 this.$http.post(url, data, options).then((response) => {
