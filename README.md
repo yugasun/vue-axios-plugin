@@ -1,10 +1,10 @@
 ## vue-axios-plugin
 
-<p>
-  <a href="https://www.npmjs.com/package/vue-axios-plugin"><img src="https://img.shields.io/npm/dm/vue-axios-plugin.svg" alt="Downloads"></a>
-  <a href="https://www.npmjs.com/package/vue-axios-plugin"><img src="https://img.shields.io/npm/v/vue-axios-plugin.svg" alt="Version"></a>
-  <br>
-</p>
+[![Build Status](https://travis-ci.org/yugasun/vue-axios-plugin.svg?branch=master)](https://travis-ci.org/yugasun/vue-axios-plugin)
+<a href="https://www.npmjs.com/package/vue-axios-plugin"><img src="https://img.shields.io/npm/dm/vue-axios-plugin.svg" alt="Downloads"></a>
+<a href="https://www.npmjs.com/package/vue-axios-plugin"><img src="https://img.shields.io/npm/v/vue-axios-plugin.svg" alt="Version"></a>
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
+
 
 axios plugin for Vuejs project
 
