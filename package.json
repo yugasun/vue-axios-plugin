@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "build": "node_modules/.bin/webpack --config build/webpack.config.js && uglifyjs dist/vue-axios-plugin.js -c -m > dist/vue-axios-plugin.min.js",
-    "lint": "eslint *.js lib/*.js --quiet"
+    "lint": "eslint *.js lib/*.js --quiet",
+    "demo": "node example/server.js"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,12 @@
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.2.1",
+    "koa-static": "^4.0.1",
+    "koa-underscore-templates": "^0.2.0",
+    "mockjs": "^1.0.1-beta3",
     "uglify-js": "^3.1.6",
     "webpack": "^3.8.1"
   }

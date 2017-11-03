@@ -17,7 +17,7 @@ module.exports = {
     path: resolve('dist'),
     filename: '[name].js',
     libraryTarget: 'umd',
-    library: 'vue-axios-plugin'
+    library: 'VueAxiosPlugin'
   },
   module: {
     rules: [

@@ -5,10 +5,20 @@
 <a href="https://www.npmjs.com/package/vue-axios-plugin"><img src="https://img.shields.io/npm/v/vue-axios-plugin.svg" alt="Version"></a>
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
 
-
 axios plugin for Vuejs project
 
 ## How to install
+
+## Script tag
+
+```html
+<!-- add it after vue.js -->
+<script src="https://unpkg.com/vue@2.5.2/dist/vue.min.js"></script>
+<script src="https://unpkg.com/vue-axios-plugin@1.1.0/dist/vue-axios-plugin.min.js"></script>
+<script>
+  Vue.use(VueAxiosPlugin.default)
+</script>
+```
 
 ### CommonJS
 

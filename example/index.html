@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue axios plugin</title>
+</head>
+<body>
+  <app id="app">
+    {{ message }}
+  </app>
+  <script src="https://unpkg.com/vue@2.5.2/dist/vue.min.js"></script>
+  <script src="./vue-axios-plugin.min.js"></script>
+  <script>
+    Vue.use(VueAxiosPlugin.default)
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Sending...'
+      },
+      methods: {
+        getUserInfo () {
+          this.$http.get('http://localhost:3010/user_info')
+          .then((res) => {
+            console.log(res)
+            this.message = 'Done, please get the result from console.log'
+          })
+        }
+      },
+      created () {
+        this.getUserInfo()
+      }
+    })
+  </script>
+</body>
+</html>
