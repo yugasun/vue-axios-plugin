@@ -1,5 +1,9 @@
 /**
- * Created by Yuga on 2017/2/21.
+ * Created Date: Friday, November 3rd 2017, 8:29:28 pm
+ * Author: yugasun
+ * Email: yuga.sun.bj@gmail.com
+ * -----
+ * Copyright (c) 2017 yugasun
  */
 import axios from 'axios'
 import QS from 'qs'

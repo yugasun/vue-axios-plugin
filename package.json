@@ -2,9 +2,14 @@
   "name": "vue-axios-plugin",
   "version": "1.0.4",
   "description": "axios plugin for Vuejs project",
-  "main": "index.js",
+  "main": "dist/vue-axios-plugin.js",
+  "files": [
+    "dist/vue-axios-plugin.js",
+    "dist/vue-axios-plugin.min.js"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node_modules/.bin/webpack --config build/webpack.config.js && uglifyjs dist/vue-axios-plugin.js -c -m > dist/vue-axios-plugin.min.js",
+    "lint": "eslint *.js lib/*.js --quiet"
   },
   "repository": {
     "type": "git",
@@ -21,8 +26,25 @@
     "url": "https://github.com/yugasun/vue-axios-plugin/issues"
   },
   "homepage": "https://github.com/yugasun/vue-axios-plugin#readme",
+  "peerDependecies": {
+    "vue": "^2.5.2"
+  },
   "dependencies": {
-    "axios": "^0.16.2",
-    "qs": "^6.5.0"
+    "axios": "^0.17.0",
+    "qs": "^6.5.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "eslint": "^4.10.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "uglify-js": "^3.1.6",
+    "webpack": "^3.8.1"
   }
 }

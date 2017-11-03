@@ -10,25 +10,10 @@ axios plugin for Vuejs project
 
 ## How to install
 
-### CommonJS:
+### CommonJS
 
 ```bash
 npm install --save vue-axios-plugin
-```
-
-Add config for webpack `babel-loader`:
-
-```javascript
-// resolve is the function to join your folder path
-function resolve (dir) {
-  return path.join(__dirname, '..', dir)
-}
-
-{
-  test: /\.js$/,
-  loader: 'babel-loader',
-  include: [resolve('src'), resolve('test'), resolve('node_modules/vue-axios-plugin')]
-},
 ```
 
 And in your entry file:
@@ -80,4 +65,8 @@ this.$axios.post(url, qs.stringify(data).then((response) => {
 })
 ```
 
-More usage, view [axios](https://github.com/mzabriskie/axios)
+More usage, go to [axios](https://github.com/mzabriskie/axios)
+
+## License
+
+MIT

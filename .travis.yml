@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - "7"
+compiler: gcc
+os:
+  - linux
+
+env:
+  global:
+    - GH_REF: github.com/yugasun/vue-axios-plugin.git
+    - secure: "Eh5oJhIilxFOykbHdvIXr5xWTE3kohwlbAwi/p8lipJHWZcqbqezsWpjww3AxKXd6In9I7YDmEhc/tc1WwH6QkHWaNs1V8CRufCUEY8L3aAKwPHlyQS2w6645NtUHMLK42BaomVoGMm2ogSHHqpCzY1WKHmQ9ltuIMWKMQMHUAU2MCkFbwi46P+zoHDARNHP0SXlhA/qrN+DbQKnT3WbgGbqiItk8vOfcXqseIzUyim7qk5es8Ph5iDxZX/tdmNr5biBoSoTkiCZ8t+GBYhkwbVC/bX1LLchWZPs/2Xc2pjs8TZCZrqAlG/SvoIlPKsj/NjZ/mktb2aSFUh449wDPQtY0WsHNdF67CV3GCIdd06SWSeL3vpaf4pl7gynSS2S+T/8JCVeRpx1nFEONUIfCkQnlZxTdxleYMd+Y3jMPH8zSizMq8/R5QrNS6NA4NiDObfQMYzrMXDniwpxBxFSa9TKyOZubOBtCRH7NpTOrJJpW5Cj4Kp18mNi9d3r2cD4Bi0iYx/uVga0Ko+mwc/PFWDcJARSnQoEB3tcI7DhKiVzBXnLicZljXjGkgA+0dIbefMcZ7mTMrn5Bril1WfE8MUeUQ8dkqKdDwAmbtBmkVdx7e0ABZ/vr+k3IyVCMwtCMi+hFNtvZYYKxi+pNEh8Vginj+pr3MOOQFIh6Aqonxw="
+
+# S: Build Lifecycle
+install:
+  - yarn install
+script:
+  - yarn lint && yarn build
+# E: Build LifeCycle
