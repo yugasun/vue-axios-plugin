@@ -9,7 +9,7 @@ axios plugin for Vuejs project
 
 ## How to install
 
-## Script tag
+### Script tag
 
 ```html
 <!-- add it after vue.js -->
