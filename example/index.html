@@ -1,32 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Vue axios plugin</title>
-</head>
-<body>
-  <app id="app">
-    {{ message }}
-  </app>
-  <script src="https://unpkg.com/vue@2.5.2/dist/vue.min.js"></script>
-  <script src="./vue-axios-plugin.min.js"></script>
-  <script>
-    Vue.use(VueAxiosPlugin.default)
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+    }
 
+    .json {
+      padding: 5px;
+      text-align: left;
+      font-size: 14px;
+      color: #d4d4d4;
+    }
+
+    .json .string {
+      color: rgba(206, 145, 120, 1);
+    }
+
+    .json .number {
+      color: rgba(181, 206, 168, 1);
+    }
+
+    .json .boolean {
+      color: rgba(215, 186, 125, 1);
+    }
+
+    .json .null {
+      color: rgba(86, 156, 214, 1);
+    }
+
+    .json .key {
+      color: rgba(156, 220, 254, 1);
+    }
+  </style>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="./vue-axios-plugin.min.js"></script>
+</head>
+
+<body>
+  <div id="app" v-html="content">
+    Loading...
+  </div>
+  <script>
+    function ObjectToHtml (data) {
+      var txt = typeof data === 'string' ? data : JSON.stringify(data)
+      try {
+        var obj = eval('(' + txt + ')')
+      } catch (e) {
+        alert('Parse Error: ' + e.description, 'err')
+        return
+      }
+      var line = '</br>'
+      var indentChar = '&nbsp;&nbsp;&nbsp;&nbsp;'
+
+      var getTab = function (num) {
+        for (var i = 0, tab = ''; i < num; i++) {
+          tab += indentChar
+        }
+        return tab
+      }
+      var format = function (value, indent, isLast, inArray) {
+        var str = ''
+        if (Object.prototype.toString.call(value) === '[object Array]') {
+          str += '['
+          value.forEach(function (item, index) {
+            str += format(item, indent, index === (value.length - 1), true)
+          })
+          str += ']'
+        } else if (value === null) {
+          str += '<span class="null">null</span>'
+        } else if (typeof value === 'object') {
+          str += '{' + line + getTab(++indent)
+          var keys = Object.keys(value)
+          keys.forEach(function (key, index) {
+            str += '<span class="key">"' + key + '"</span>: ' + format(value[key], indent, index === (keys.length - 1))
+          })
+          str += '}'
+          indent--
+        } else if (typeof value === 'boolean') {
+          str += '<span class="boolean">' + value + '</span>'
+        } else if (typeof value === 'string') {
+          str += '<span class="string">"' + value + '"</span>'
+        } else {
+          str += '<span class="number">' + value + '</span>'
+        }
+        str += (isLast ? '' : ',') + (inArray ? '' : (line + getTab(isLast ? --indent : indent)))
+        return str
+      }
+      return ('<div class="json">' + format(obj, 0, true) + '</div>')
+    }
     var app = new Vue({
       el: '#app',
       data: {
-        message: 'Sending...'
+        content: 'Sending...'
       },
       methods: {
         getUserInfo () {
           this.$http.get('http://localhost:3010/user_info')
-          .then((res) => {
-            console.log(res)
-            this.message = 'Done, please get the result from console.log'
-          })
+            .then((res) => {
+              console.log(res)
+              this.content = ObjectToHtml(res)
+            })
         }
       },
       created () {
@@ -35,4 +115,5 @@
     })
   </script>
 </body>
+
 </html>

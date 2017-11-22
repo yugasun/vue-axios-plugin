@@ -13,11 +13,8 @@ axios plugin for Vuejs project
 
 ```html
 <!-- add it after vue.js -->
-<script src="https://unpkg.com/vue@2.5.2/dist/vue.min.js"></script>
+<script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/vue-axios-plugin"></script>
-<script>
-  Vue.use(VueAxiosPlugin.default)
-</script>
 ```
 
 ### CommonJS

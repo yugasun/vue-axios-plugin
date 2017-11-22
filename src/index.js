@@ -22,8 +22,6 @@ axios.interceptors.response.use(
   error => Promise.resolve(error.response)
 )
 
-const VueAxiosPlugin = {}
-
 /**
  * JSON stringify the properties who's type if object
  *
@@ -50,6 +48,8 @@ const defaultConfig = {
   },
   withCredentials: true
 }
+
+let VueAxiosPlugin = {}
 
 /**
  * options.checkStatus: default uniform handler for get/post method
@@ -90,6 +90,10 @@ VueAxiosPlugin.install = (Vue, options) => {
       return axios(axiosOpt).then(resCheck)
     }
   }
+}
+
+if (window.Vue) {
+  window.Vue.use(VueAxiosPlugin)
 }
 
 export default VueAxiosPlugin

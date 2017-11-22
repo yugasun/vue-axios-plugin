@@ -1225,8 +1225,6 @@ _axios2.default.interceptors.response.use(function (response) {
   return Promise.resolve(error.response);
 });
 
-var VueAxiosPlugin = {};
-
 /**
  * JSON stringify the properties who's type if object
  *
@@ -1252,11 +1250,14 @@ var defaultConfig = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
   },
   withCredentials: true
+};
 
-  /**
-   * options.checkStatus: default uniform handler for get/post method
-   */
-};VueAxiosPlugin.install = function (Vue, options) {
+var VueAxiosPlugin = {};
+
+/**
+ * options.checkStatus: default uniform handler for get/post method
+ */
+VueAxiosPlugin.install = function (Vue, options) {
   var resCheck = options && options.checkStatus && typeof options.checkStatus === 'function' ? options.checkStatus : defaultCheckStatus;
   Vue.prototype.$axios = _axios2.default;
   Vue.prototype.$http = {
@@ -1283,6 +1284,10 @@ var defaultConfig = {
     }
   };
 };
+
+if (window.Vue) {
+  window.Vue.use(VueAxiosPlugin);
+}
 
 exports.default = VueAxiosPlugin;
 
