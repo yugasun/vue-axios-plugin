@@ -10,7 +10,7 @@
     "build:browser": "rollup --config build/rollup.config.browser.js",
     "build:es": "rollup --config build/rollup.config.es.js",
     "build:umd": "rollup --config build/rollup.config.umd.js",
-    "prepublish": "npm run test && npm run build",
+    "prepublish": "npm run lint && npm run build",
     "lint": "eslint src/*.js --quiet",
     "demo": "node example/server.js"
   },
