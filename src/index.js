@@ -6,7 +6,7 @@
  * Copyright (c) 2017 yugasun
  */
 import axios from 'axios'
-import QS from 'qs'
+import stringify from 'qs/lib/stringify'
 
 function defaultCheckStatus (response) {
   return response
@@ -81,7 +81,7 @@ VueAxiosPlugin.install = (Vue, options) => {
           transformRequest: [
             function (data) {
               data = jsonProp(data)
-              data = QS.stringify(data)
+              data = stringify(data)
               return data
             }
           ]

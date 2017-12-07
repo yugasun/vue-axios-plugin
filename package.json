@@ -2,15 +2,16 @@
   "name": "vue-axios-plugin",
   "version": "1.1.5",
   "description": "axios plugin for Vuejs project",
-  "main": "dist/vue-axios-plugin.min.js",
-  "module": "src/vue-axios-plugin.js",
-  "files": [
-    "dist/vue-axios-plugin.js",
-    "dist/vue-axios-plugin.min.js"
-  ],
+  "main": "dist/vue-axios-plugin.umd.js",
+  "module": "dist/vue-axios-plugin.esm.js",
+  "unpkg": "dist/vue-axios-plugin.min.js",
   "scripts": {
-    "build": "node_modules/.bin/webpack --config build/webpack.config.js && uglifyjs dist/vue-axios-plugin.js -c -m > dist/vue-axios-plugin.min.js",
-    "lint": "eslint *.js lib/*.js --quiet",
+    "build": "npm run build:browser && npm run build:es && npm run build:umd",
+    "build:browser": "rollup --config build/rollup.config.browser.js",
+    "build:es": "rollup --config build/rollup.config.es.js",
+    "build:umd": "rollup --config build/rollup.config.umd.js",
+    "prepublish": "npm run test && npm run build",
+    "lint": "eslint src/*.js --quiet",
     "demo": "node example/server.js"
   },
   "repository": {
@@ -32,12 +33,15 @@
     "vue": "^2.5.2"
   },
   "dependencies": {
-    "axios": "^0.17.0",
+    "axios": "^0.17.1",
     "qs": "^6.5.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.3",
     "babel-loader": "^7.1.2",
+    "babel-plugin-dynamic-import-node": "^1.2.0",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
     "eslint": "^4.10.0",
@@ -52,7 +56,12 @@
     "koa-static": "^4.0.1",
     "koa-underscore-templates": "^0.2.0",
     "mockjs": "^1.0.1-beta3",
-    "uglify-js": "^3.1.6",
-    "webpack": "^3.8.1"
+    "rollup": "^0.52.1",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-uglify": "^2.0.1",
+    "uglify-es": "^3.2.1"
   }
 }
