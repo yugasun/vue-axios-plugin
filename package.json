@@ -3,6 +3,7 @@
   "version": "1.1.4",
   "description": "axios plugin for Vuejs project",
   "main": "dist/vue-axios-plugin.min.js",
+  "module": "src/vue-axios-plugin.js",
   "files": [
     "dist/vue-axios-plugin.js",
     "dist/vue-axios-plugin.min.js"
