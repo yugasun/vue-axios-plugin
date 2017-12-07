@@ -97,12 +97,12 @@ VueAxiosPlugin.install = (Vue, options) => {
 // Auto-install
 let GlobalVue = null
 if (typeof window !== 'undefined') {
-	GlobalVue = window.Vue
+  GlobalVue = window.Vue
 } else if (typeof global !== 'undefined') {
-	GlobalVue = global.Vue
+  GlobalVue = global.Vue
 }
 if (GlobalVue) {
-	GlobalVue.use(VueAxiosPlugin)
+  GlobalVue.use(VueAxiosPlugin)
 }
 
 export default VueAxiosPlugin
