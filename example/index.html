@@ -39,8 +39,8 @@
       color: rgba(156, 220, 254, 1);
     }
   </style>
-  <script src="https://unpkg.com/vue"></script>
-  <script src="./vue-axios-plugin.min.js"></script>
+  <script src="./vue.min.js"></script>
+  <script src="../dist/vue-axios-plugin.min.js"></script>
 </head>
 
 <body>
@@ -102,10 +102,13 @@
       },
       methods: {
         getUserInfo () {
-          this.$http.get('http://localhost:3010/user_info')
+          this.$http.get('https://apimock.yugasun.com/mock/11/user_info')
             .then((res) => {
               console.log(res)
               this.content = ObjectToHtml(res)
+            })
+            .catch((e) => {
+              console.log(e)
             })
         }
       },

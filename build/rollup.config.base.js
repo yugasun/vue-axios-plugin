@@ -18,10 +18,7 @@ export default {
       include: 'node_modules/**'
     }),
     babel({
-      exclude: 'node_modules/**',
-      'plugins': [
-        'external-helpers'
-      ]
+      exclude: 'node_modules/**'
     }),
     replace({
       VERSION: JSON.stringify(config.version)

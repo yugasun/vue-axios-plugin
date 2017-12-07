@@ -1756,45 +1756,9 @@ var stringify_1 = function (object, opts) {
     return joined.length > 0 ? prefix + joined : '';
 };
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-};
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }
-
-  return target;
-};
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /**
  * Created Date: Friday, November 3rd 2017, 8:29:28 pm
@@ -1855,7 +1819,7 @@ VueAxiosPlugin.install = function (Vue, options) {
   var resCheck = options && options.checkStatus && typeof options.checkStatus === 'function' ? options.checkStatus : defaultCheckStatus;
   Vue.prototype.$axios = axios;
   Vue.prototype.$http = {
-    get: function get$$1(url, data, options) {
+    get: function get(url, data, options) {
       var axiosOpt = _extends({}, defaultConfig, options, {
         method: 'get',
         url: url,

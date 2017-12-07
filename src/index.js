@@ -5,7 +5,9 @@
  * -----
  * Copyright (c) 2017 yugasun
  */
-import axios from 'axios'
+
+// https://github.com/axios/axios/issues/683
+import axios from 'axios/dist/axios'
 import stringify from 'qs/lib/stringify'
 
 function defaultCheckStatus (response) {
@@ -46,7 +48,7 @@ const defaultConfig = {
     'X-Requested-With': 'XMLHttpRequest',
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
   },
-  withCredentials: true
+  withCredentials: false
 }
 
 let VueAxiosPlugin = {}
@@ -92,8 +94,15 @@ VueAxiosPlugin.install = (Vue, options) => {
   }
 }
 
-if (window.Vue) {
-  window.Vue.use(VueAxiosPlugin)
+// Auto-install
+let GlobalVue = null
+if (typeof window !== 'undefined') {
+	GlobalVue = window.Vue
+} else if (typeof global !== 'undefined') {
+	GlobalVue = global.Vue
+}
+if (GlobalVue) {
+	GlobalVue.use(VueAxiosPlugin)
 }
 
 export default VueAxiosPlugin
