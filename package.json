@@ -1,6 +1,6 @@
 {
   "name": "vue-axios-plugin",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "axios plugin for Vuejs project",
   "main": "dist/vue-axios-plugin.umd.js",
   "module": "dist/vue-axios-plugin.esm.js",
