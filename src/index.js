@@ -39,18 +39,6 @@ function jsonProp (obj) {
   return obj
 }
 
-/**
- * default axios config
- */
-const defaultConfig = {
-  timeout: 60000,
-  headers: {
-    'X-Requested-With': 'XMLHttpRequest',
-    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-  },
-  withCredentials: false
-}
-
 let VueAxiosPlugin = {}
 
 /**
@@ -62,7 +50,6 @@ VueAxiosPlugin.install = (Vue, options) => {
   Vue.prototype.$http = {
     get: (url, data, options) => {
       let axiosOpt = {
-        ...defaultConfig,
         ...options,
         ...{
           method: 'get',
@@ -74,7 +61,6 @@ VueAxiosPlugin.install = (Vue, options) => {
     },
     post: (url, data, options) => {
       let axiosOpt = {
-        ...defaultConfig,
         ...options,
         ...{
           method: 'post',
