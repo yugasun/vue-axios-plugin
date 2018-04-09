@@ -48,7 +48,7 @@
     Loading...
   </div>
   <script>
-    function ObjectToHtml (data) {
+    function ObjectToHtml(data) {
       var txt = typeof data === 'string' ? data : JSON.stringify(data)
       try {
         var obj = eval('(' + txt + ')')
@@ -101,18 +101,27 @@
         content: 'Sending...'
       },
       methods: {
-        getUserInfo () {
-          this.$http.get('https://apimock.yugasun.com/mock/11/user_info')
-            .then((res) => {
-              console.log(res)
-              this.content = ObjectToHtml(res)
+        getUserInfo() {
+          Promise.all([
+            this.$http.get('http://yapi.demo.qunar.com/mock/5802/user', { id: 1 }),
+            this.$http.post('http://yapi.demo.qunar.com/mock/5802/user', {
+              username: 'yugasun',
+              url: 'https://yugasun.com'
             })
-            .catch((e) => {
-              console.log(e)
+          ]).then((res) => {
+            console.log(res)
+            let resArr = []
+            res.forEach((r) => {
+              resArr.push(r.data)
             })
+
+            this.content = ObjectToHtml(resArr)
+          }).catch((e) => {
+            console.log(e)
+          })
         }
       },
-      created () {
+      created() {
         this.getUserInfo()
       }
     })

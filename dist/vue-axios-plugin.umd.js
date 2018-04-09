@@ -1977,12 +1977,16 @@ axios.interceptors.response.use(function (response) {
 });
 
 /**
- * JSON stringify the properties who's type if object
+ * JSON stringify the properties who's type is object
  *
- * @param {any} obj
+ * @param {object} obj
  * @returns
  */
 function jsonProp(obj) {
+  // type check
+  if (!obj || (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) !== 'object') {
+    return obj;
+  }
   Object.keys(obj).forEach(function (key) {
     if (_typeof(obj[key]) === 'object') {
       obj[key] = JSON.stringify(obj[key]);
@@ -1998,6 +2002,7 @@ var VueAxiosPlugin = {};
  */
 VueAxiosPlugin.install = function (Vue, options) {
   var resCheck = options && options.checkStatus && typeof options.checkStatus === 'function' ? options.checkStatus : defaultCheckStatus;
+
   Vue.prototype.$axios = axios;
   Vue.prototype.$http = {
     get: function get(url, data, options) {
@@ -2014,9 +2019,8 @@ VueAxiosPlugin.install = function (Vue, options) {
         url: url,
         data: data,
         transformRequest: [function (data) {
-          data = jsonProp(data);
-          data = stringify_1(data);
-          return data;
+          // if data has object type properties, need JSON.stringify them.
+          return stringify_1(jsonProp(data));
         }]
       });
       return axios(axiosOpt).then(resCheck);

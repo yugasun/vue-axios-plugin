@@ -25,12 +25,16 @@ axios.interceptors.response.use(
 )
 
 /**
- * JSON stringify the properties who's type if object
+ * JSON stringify the properties who's type is object
  *
- * @param {any} obj
+ * @param {object} obj
  * @returns
  */
 function jsonProp (obj) {
+  // type check
+  if (!obj || (typeof obj !== 'object')) {
+    return obj
+  }
   Object.keys(obj).forEach((key) => {
     if ((typeof obj[key]) === 'object') {
       obj[key] = JSON.stringify(obj[key])
@@ -45,7 +49,10 @@ let VueAxiosPlugin = {}
  * options.checkStatus: default uniform handler for get/post method
  */
 VueAxiosPlugin.install = (Vue, options) => {
-  let resCheck = (options && options.checkStatus && typeof (options.checkStatus) === 'function') ? options.checkStatus : defaultCheckStatus
+  let resCheck = (options && options.checkStatus && typeof (options.checkStatus) === 'function')
+    ? options.checkStatus
+    : defaultCheckStatus
+
   Vue.prototype.$axios = axios
   Vue.prototype.$http = {
     get: (url, data, options) => {
@@ -68,9 +75,8 @@ VueAxiosPlugin.install = (Vue, options) => {
           data: data,
           transformRequest: [
             function (data) {
-              data = jsonProp(data)
-              data = stringify(data)
-              return data
+              // if data has object type properties, need JSON.stringify them.
+              return stringify(jsonProp(data))
             }
           ]
         }
