@@ -106,7 +106,10 @@
             this.$http.get('http://yapi.demo.qunar.com/mock/5802/user', { id: 1 }),
             this.$http.post('http://yapi.demo.qunar.com/mock/5802/user', {
               username: 'yugasun',
-              url: 'https://yugasun.com'
+            }, {
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }
             })
           ]).then((res) => {
             console.log(res)

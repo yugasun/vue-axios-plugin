@@ -2,46 +2,10 @@
  * Created Date: Friday, November 3rd 2017, 8:29:28 pm
  * Author: yugasun
  * Email: yuga.sun.bj@gmail.com
- * -----
- * Copyright (c) 2017 yugasun
  */
 
-// https://github.com/axios/axios/issues/683
+// https://github.com/axios/axios
 import axios from 'axios/dist/axios'
-import stringify from 'qs/lib/stringify'
-
-function defaultCheckStatus (response) {
-  return response
-}
-
-axios.interceptors.request.use(
-  config => config,
-  error => Promise.reject(error)
-)
-
-axios.interceptors.response.use(
-  response => response,
-  error => Promise.resolve(error.response)
-)
-
-/**
- * JSON stringify the properties who's type is object
- *
- * @param {object} obj
- * @returns
- */
-function jsonProp (obj) {
-  // type check
-  if (!obj || (typeof obj !== 'object')) {
-    return obj
-  }
-  Object.keys(obj).forEach((key) => {
-    if ((typeof obj[key]) === 'object') {
-      obj[key] = JSON.stringify(obj[key])
-    }
-  })
-  return obj
-}
 
 let VueAxiosPlugin = {}
 
@@ -49,11 +13,34 @@ let VueAxiosPlugin = {}
  * options.checkStatus: default uniform handler for get/post method
  */
 VueAxiosPlugin.install = (Vue, options) => {
-  let resCheck = (options && options.checkStatus && typeof (options.checkStatus) === 'function')
-    ? options.checkStatus
-    : defaultCheckStatus
+  const defaultOptions = {
+    // request interceptor handler
+    reqHandleFunc: config => config,
+    reqErrorFunc: error => Promise.reject(error),
+    // response interceptor handler
+    resHandleFunc: response => response,
+    resErrorFunc: error => Promise.reject(error)
+  }
 
-  Vue.prototype.$axios = axios
+  const initOptions = {
+    ...defaultOptions,
+    ...options
+  }
+
+  const service = axios.create(initOptions)
+
+  // Add a request interceptor
+  service.interceptors.request.use(
+    config => initOptions.reqHandleFunc(config),
+    error => initOptions.reqErrorFunc(error)
+  )
+  // Add a response interceptor
+  service.interceptors.response.use(
+    response => initOptions.resHandleFunc(response),
+    error => initOptions.resErrorFunc(error)
+  )
+
+  Vue.prototype.$axios = service
   Vue.prototype.$http = {
     get: (url, data, options) => {
       let axiosOpt = {
@@ -64,7 +51,7 @@ VueAxiosPlugin.install = (Vue, options) => {
           params: data
         }
       }
-      return axios(axiosOpt).then(resCheck)
+      return service(axiosOpt)
     },
     post: (url, data, options) => {
       let axiosOpt = {
@@ -72,16 +59,10 @@ VueAxiosPlugin.install = (Vue, options) => {
         ...{
           method: 'post',
           url: url,
-          data: data,
-          transformRequest: [
-            function (data) {
-              // if data has object type properties, need JSON.stringify them.
-              return stringify(jsonProp(data))
-            }
-          ]
+          data: data
         }
       }
-      return axios(axiosOpt).then(resCheck)
+      return service(axiosOpt)
     }
   }
 }
