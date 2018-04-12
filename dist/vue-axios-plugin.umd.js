@@ -1523,9 +1523,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 // https://github.com/axios/axios
 var VueAxiosPlugin = {};
 
-/**
- * options.checkStatus: default uniform handler for get/post method
- */
 VueAxiosPlugin.install = function (Vue, options) {
   var defaultOptions = {
     // request interceptor handler
