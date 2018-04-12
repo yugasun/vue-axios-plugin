@@ -9,9 +9,6 @@ import axios from 'axios/dist/axios'
 
 let VueAxiosPlugin = {}
 
-/**
- * options.checkStatus: default uniform handler for get/post method
- */
 VueAxiosPlugin.install = (Vue, options) => {
   const defaultOptions = {
     // request interceptor handler

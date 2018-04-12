@@ -52,7 +52,7 @@ Except axios default [request options](https://github.com/axios/axios#request-co
 
 ## Usage
 
-default method in `$http`, it just contains get and post method:
+Default method in `$http`, it just contains get and post method:
 
 ```javascript
 this.$http.get(url, data, options).then((response) => {
@@ -63,7 +63,7 @@ this.$http.post(url, data, options).then((response) => {
 })
 ```
 
-use axios original method in `$axios`, by this, you can use all allowed http methods: get,post,delete,put...
+Use axios original method in `$axios`, by this, you can use all allowed http methods: get,post,delete,put...
 
 ```javascript
 this.$axios.get(url, data, options).then((response) => {
@@ -74,6 +74,14 @@ this.$axios.post(url, data, options).then((response) => {
   console.log(response)
 })
 ```
+
+## ChangeLog for v1.3.0
+
+Before v1.3.0, it send a request use `application/x-www-form-urlencoded` format by default, so it config `transformRequest` for post request by default, but it is unreasonable. So in v1.3.0, I remove it, all configuration depends on yourself, so you can config the `Content-Type` and `transformRequest` depend on your backend service.
+
+## TODO
+
+- [] Unit test.
 
 ## Notice!!!
 
