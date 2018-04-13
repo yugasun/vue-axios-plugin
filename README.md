@@ -81,7 +81,7 @@ Before v1.3.0, it send a request use `application/x-www-form-urlencoded` format 
 
 ## TODO
 
-- [] Unit test.
+- [ ] Unit test.
 
 ## Notice!!!
 
